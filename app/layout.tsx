@@ -25,17 +25,29 @@ export const metadata: Metadata = {
         url: "/images/Band preview 1.png",
         width: 1200,
         height: 630,
-        alt: "Vitalband Smart Health Monitor"
+        alt: "Vitalband Smart Health Monitor",
+        type: "image/png",
+      },
+      {
+        // Square image for WhatsApp
+        url: "/images/Logo square.jpg",
+        width: 600,
+        height: 600,
+        alt: "Vitalband Logo",
+        type: "image/jpeg",
       }
     ],
     locale: "en_US",
     type: "website",
+    siteName: "Vitalband",
   },
   twitter: {
     card: "summary_large_image",
     title: "Vitalband - Smart Health Monitoring",
     description: "24/7 health tracking with instant SOS and location sharing",
-    images: ["/images/Band preview 1.png"],
+    images: ["/images/Band preview 1.png", "/images/Logo square.jpg"],
+    creator: "@vitalband",
+    site: "@vitalband",
   },
   robots: {
     index: true,
