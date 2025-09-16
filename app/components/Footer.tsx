@@ -1,53 +1,39 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
-import {
-    FacebookIcon,
-    TwitterIcon,
-    InstagramIcon,
-    LinkedinIcon,
-    PhoneIcon,
-    MailIcon,
-    MapPinIcon
-} from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const footerLinks = {
     legal: [
-        { name: 'Privacy Policy', href: '#' },
-        { name: 'Terms of Service', href: '#' },
-        { name: 'Shipping Information', href: '#' },
-        { name: 'Returns & Refunds', href: '#' },
-        { name: 'Warranty', href: '#' }
+        { name: 'Privacy Policy', href: '/legal#privacy' },
+        { name: 'Terms of Service', href: '/legal#terms' },
+        { name: 'Shipping Information', href: '/legal#shipping' },
+        { name: 'Returns & Refunds', href: '/legal#returns' },
+        { name: 'Warranty', href: '/legal#warranty' }
     ],
     company: [
-        { name: 'About Us', href: '#' },
-        { name: 'Contact', href: '#' },
-        { name: 'Careers', href: '#' },
-        { name: 'Press Kit', href: '#' },
-        { name: 'Blog', href: '#' }
+        { name: 'About Us', href: '/about' },
+        { name: 'Contact', href: '/contact' },
+        { name: 'FAQ', href: '/faq' },
     ],
     support: [
-        { name: 'Help Center', href: '#' },
-        { name: 'User Guide', href: '#' },
-        { name: 'FAQs', href: '#' },
-        { name: 'Track Order', href: '#' },
-        { name: 'Contact Support', href: '#' }
+        { name: 'Help Center', href: '/faq' },
+        { name: 'Contact Support', href: '/contact' }
     ]
 };
 
 const socialLinks = [
-    { name: 'Facebook', icon: FacebookIcon, href: '#' },
-    { name: 'Twitter', icon: TwitterIcon, href: '#' },
-    { name: 'Instagram', icon: InstagramIcon, href: '#' },
-    { name: 'LinkedIn', icon: LinkedinIcon, href: '#' }
+    { name: 'Facebook', href: '#' },
+    { name: 'Twitter', href: '#' },
+    { name: 'Instagram', href: '#' },
+    { name: 'LinkedIn', href: '#' }
 ];
 
 const contactInfo = [
-    { icon: PhoneIcon, text: '+1 (800) VITAL-BAND', href: '#' },
-    { icon: MailIcon, text: 'support@vitalband.com', href: '#' },
-    { icon: MapPinIcon, text: 'Bangalore, India', href: '#' }
+    { text: '+1 (800) VITAL-BAND', href: 'tel:+18008482526' },
+    { text: 'support@vitalband.com', href: 'mailto:support@vitalband.com' },
+    { text: 'Bangalore, India', href: '#' }
 ];
 
 export default function Footer() {
@@ -57,31 +43,29 @@ export default function Footer() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 md:gap-8">
                     {/* Brand Section */}
                     <div className="space-y-6">
-                        <Image
-                            src="/images/Logo rectangle.jpg"
-                            alt="Vitalband Logo"
-                            width={160}
-                            height={64}
-                            className="rounded-lg"
-                        />
+                        <Link href="/">
+                            <Image
+                                src="/images/Logo rectangle.jpg"
+                                alt="Vitalband Logo"
+                                width={160}
+                                height={64}
+                                className="rounded-lg"
+                            />
+                        </Link>
                         <p className="text-gray-400 text-sm">
                             Empowering seniors with smart health monitoring and instant emergency response.
                         </p>
                         <div className="flex gap-4">
-                            {socialLinks.map((social) => {
-                                const Icon = social.icon;
-                                return (
-                                    <motion.button
-                                        key={social.name}
-                                        className="text-gray-400 hover:text-white transition-colors"
-                                        whileHover={{ scale: 1.1 }}
-                                        whileTap={{ scale: 0.95 }}
-                                    >
-                                        <Icon className="w-5 h-5" />
-                                        <span className="sr-only">{social.name}</span>
-                                    </motion.button>
-                                );
-                            })}
+                            {socialLinks.map((social) => (
+                                <Link
+                                    key={social.name}
+                                    href={social.href}
+                                    className="text-gray-400 hover:text-white transition-colors"
+                                >
+                                    <span className="sr-only">{social.name}</span>
+                                    {/* Add social icons here */}
+                                </Link>
+                            ))}
                         </div>
                     </div>
 
@@ -91,11 +75,12 @@ export default function Footer() {
                         <ul className="space-y-3">
                             {footerLinks.legal.map((link) => (
                                 <li key={link.name}>
-                                    <button
-                                        className="text-gray-400 hover:text-white text-sm transition-colors text-left"
+                                    <Link
+                                        href={link.href}
+                                        className="text-gray-400 hover:text-white text-sm transition-colors"
                                     >
                                         {link.name}
-                                    </button>
+                                    </Link>
                                 </li>
                             ))}
                         </ul>
@@ -107,11 +92,12 @@ export default function Footer() {
                         <ul className="space-y-3">
                             {footerLinks.company.map((link) => (
                                 <li key={link.name}>
-                                    <button
-                                        className="text-gray-400 hover:text-white text-sm transition-colors text-left"
+                                    <Link
+                                        href={link.href}
+                                        className="text-gray-400 hover:text-white text-sm transition-colors"
                                     >
                                         {link.name}
-                                    </button>
+                                    </Link>
                                 </li>
                             ))}
                         </ul>
@@ -120,20 +106,17 @@ export default function Footer() {
                     {/* Contact Info */}
                     <div>
                         <h3 className="text-white font-semibold mb-4">Contact Us</h3>
-                        <ul className="space-y-4">
-                            {contactInfo.map((info) => {
-                                const Icon = info.icon;
-                                return (
-                                    <li key={info.text}>
-                                        <button
-                                            className="flex items-center gap-2 text-gray-400 hover:text-white text-sm transition-colors"
-                                        >
-                                            <Icon className="w-4 h-4" />
-                                            {info.text}
-                                        </button>
-                                    </li>
-                                );
-                            })}
+                        <ul className="space-y-3">
+                            {contactInfo.map((info) => (
+                                <li key={info.text}>
+                                    <Link
+                                        href={info.href}
+                                        className="text-gray-400 hover:text-white text-sm transition-colors"
+                                    >
+                                        {info.text}
+                                    </Link>
+                                </li>
+                            ))}
                         </ul>
                     </div>
                 </div>
