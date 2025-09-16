@@ -13,6 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://vitalband.com'),
   title: "Vitalband - Smart Health Monitoring & Emergency Response",
   description: "24/7 health tracking with instant SOS and location sharing. Stay connected with your loved ones and ensure their safety with real-time monitoring.",
   keywords: "health monitoring, emergency response, elderly care, health tracking, SOS device, medical alert, senior safety, health tech",
@@ -62,11 +63,6 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: "https://vitalband.com",
-  },
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 1,
   },
   category: "Health & Wellness",
 };

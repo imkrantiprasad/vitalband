@@ -2,7 +2,7 @@
 
 import { useSearchParams } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import Header from '../components/Header';
 
 const hardwareVariants = {
@@ -39,10 +39,18 @@ const softwareSubscriptions = {
     }
 };
 
-export default function CheckoutPage() {
+function CheckoutContent() {
     const searchParams = useSearchParams();
     const hw = searchParams.get('hw') as keyof typeof hardwareVariants;
     const sw = searchParams.get('sw') as keyof typeof softwareSubscriptions;
+
+    if (!hw || !sw || !hardwareVariants[hw] || !softwareSubscriptions[sw]) {
+        return (
+            <div className="text-white text-center py-12">
+                Invalid product selection. Please return to the product page and try again.
+            </div>
+        );
+    }
 
     const [formData, setFormData] = useState({
         name: '',
@@ -196,6 +204,21 @@ export default function CheckoutPage() {
                     </div>
                 </div>
             </div>
+        </div>
+    );
+}
+
+export default function CheckoutPage() {
+    return (
+        <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-800">
+            <Header />
+            <Suspense fallback={
+                <div className="py-24 text-center text-white">
+                    Loading checkout details...
+                </div>
+            }>
+                <CheckoutContent />
+            </Suspense>
         </div>
     );
 }
